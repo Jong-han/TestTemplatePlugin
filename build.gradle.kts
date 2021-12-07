@@ -30,6 +30,7 @@ intellij {
     version.set(properties("platformVersion"))
     type.set(properties("platformType"))
 
+    intellij.localPath.set(properties("StudioRunPath")) 
     // Plugin Dependencies. Uses `platformPlugins` property from the gradle.properties file.
     plugins.set(properties("platformPlugins").split(',').map(String::trim).filter(String::isNotEmpty))
 }
@@ -58,6 +59,10 @@ tasks {
         withType<KotlinCompile> {
             kotlinOptions.jvmTarget = it
         }
+    }
+    
+    instrumentCode {
+        compilerVersion.set("202.7660.26") //현재 사용중인 Android Studio Version
     }
 
     wrapper {
